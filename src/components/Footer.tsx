@@ -9,7 +9,7 @@ const Footer = () => (
           <ul className="space-y-3 text-sm text-gray-600">
             <li><a href="#" className="hover:underline">Help Center</a></li>
             <li><a href="#" className="hover:underline">Get help with a safety issue</a></li>
-            <li><a href="#" className="hover:underline">AirCover</a></li>
+            <li><a href="#" className="hover:underline">NookCover</a></li>
             <li><a href="#" className="hover:underline">Anti-discrimination</a></li>
             <li><a href="#" className="hover:underline">Disability support</a></li>
           </ul>
@@ -17,15 +17,15 @@ const Footer = () => (
         <div>
           <h3 className="font-semibold text-gray-900 mb-4">Hosting</h3>
           <ul className="space-y-3 text-sm text-gray-600">
-            <li><a href="#" className="hover:underline">Airbnb your home</a></li>
-            <li><a href="#" className="hover:underline">AirCover for Hosts</a></li>
+            <li><a href="#" className="hover:underline">Nook your home</a></li>
+            <li><a href="#" className="hover:underline">NookCover for Hosts</a></li>
             <li><a href="#" className="hover:underline">Hosting resources</a></li>
             <li><a href="#" className="hover:underline">Community forum</a></li>
             <li><a href="#" className="hover:underline">Hosting responsibly</a></li>
           </ul>
         </div>
         <div>
-          <h3 className="font-semibold text-gray-900 mb-4">Airbnb</h3>
+          <h3 className="font-semibold text-gray-900 mb-4">Nook</h3>
           <ul className="space-y-3 text-sm text-gray-600">
             <li><a href="#" className="hover:underline">Newsroom</a></li>
             <li><a href="#" className="hover:underline">New features</a></li>
@@ -45,7 +45,7 @@ const Footer = () => (
         </div>
       </div>
       <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm text-gray-600">© 2024 Airbnb, Inc. All rights reserved.</p>
+        <p className="text-sm text-gray-600">© 2025 Nook, Inc. All rights reserved.</p>
         <div className="flex items-center space-x-4 mt-4 md:mt-0">
           <button className="text-sm text-gray-600 hover:underline">English (US)</button>
           <button className="text-sm text-gray-600 hover:underline">$ USD</button>

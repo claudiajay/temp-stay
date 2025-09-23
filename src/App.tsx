@@ -1,15 +1,17 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Landing from "./pages/Landing"
-import Login from "./pages/Login"
-import DropMenu from "./components/DropMenu"
+import PropertyDetails from "./pages/PropertyDetails"
+
+
+
+
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/menu" element={<DropMenu options={[]} />} />
+        <Route path="/property/:id" element={<PropertyDetails />} />
       </Routes>
     </Router>
   )

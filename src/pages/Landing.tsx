@@ -9,6 +9,7 @@ import PropertyCard from "../components/PropertyCard";
 
 const Landing = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [showDetails, setShowDetails] = useState(true);
 
   const properties = [
     {
@@ -147,7 +148,7 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="px-6 py-8 bg-gradient-to-br from-red-50 to-pink-50">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">Find your next stay</h1>
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">Find your next nook</h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Search low prices on hotels, homes and much more...
           </p>
