@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import { ChevronLeft, ChevronRight, Heart, Star } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface PropertyCardProps {
   property: {
@@ -18,17 +19,24 @@ interface PropertyCardProps {
 const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
 
-  const nextImage = () => {
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setCurrentImageIndex((prev) => (prev + 1) % property.images.length);
   };
 
-  const prevImage = () => {
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setCurrentImageIndex((prev) => (prev - 1 + property.images.length) % property.images.length);
   }
 
+  const handleCardClick = () => {
+    navigate(`/property/${property.id}`);
+  }
+
   return (
-    <div className='group cursor-pointer'>
+    <div className='group cursor-pointer' onClick={handleCardClick}>
       <div className='relative rounded-xl overflow-hidden mb-3'>
         <div className='relative h-64 bg-gray-200'>
           <img 
@@ -50,7 +58,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                prevImage();
+                prevImage(e);
               }}
               className='absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white transition opacity-0 group=hover:opacity-100'
             >
@@ -59,7 +67,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                nextImage();
+                nextImage(e);
               }}
               className='absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white transition opacity-0 group-hover:opacity-100'
             >
@@ -84,7 +92,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
         </div>
       </div>
       <div className='space-y-1'>
-        <div className='flex items-center justify-center'>
+        <div className='flex items-center justify-between'>
           <h3 className='font-semibold text-gray-900 truncate'>{property.title}</h3>
           <div className='flex items-center space-x-1 text-sm'>
             <Star size={12} className='fill-current'/>
@@ -102,4 +110,4 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
   );
 };
 
-export default PropertyCard
+export default PropertyCard;
