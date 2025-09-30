@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
@@ -10,6 +10,14 @@ import PropertyCard from "../components/PropertyCard";
 const Landing = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [showDetails, setShowDetails] = useState(true);
+  const categoryTabsRef = useRef<HTMLDivElement>(null);
+
+  const handleInspirationClick = (category: string) => {
+    setActiveCategory(category);
+    setTimeout(() => {
+      categoryTabsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
 
   const properties = [
     {
@@ -157,7 +165,9 @@ const Landing = () => {
       </section>
 
 
-      <CategoryTabs activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+      <div ref={categoryTabsRef}>
+        <CategoryTabs activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+      </div>
 
       <section className="max-w-7xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -167,11 +177,15 @@ const Landing = () => {
         </div>
       </section>
 
+
       <section className="max-w-7xl mx-auto px-6 py-16">
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Inspiration for future getaways</h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="col-span-2 row-span-2">
-            <div className="relative h-96 rounded-xl overflow-hidden group cursor-pointer">
+            <div
+              className="relative h-96 rounded-xl overflow-hidden group cursor-pointer"
+              onClick={() => handleInspirationClick('trending')}
+            >
               <img
                 src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
                 alt="Featured destination"
@@ -180,21 +194,25 @@ const Landing = () => {
               <div className="absolute inset-0 bg-black/30 flex items-end p-6">
                 <div className="text-white">
                   <h3 className="text-2xl font-bold mb-2">The great outdoors</h3>
-                  <p>Wishlists curated by Stay-savy</p>
+                  <p>Wishlists curated by Nook</p>
                 </div>
               </div>
             </div>
           </div>
           <div className="col-span-2 grid grid-rows-2 gap-4">
             {[
-              { title: "Unique stays", img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400" },
-              { title: "Entire homes", img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400" },
-              { title: "Pet-friendly", img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400" },
-              { title: "Travel tips", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400" }
+              { title: "Unique stays", img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400", category: "unique" },
+              { title: "Entire homes", img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400", category: "all" },
+              // { title: "Pet-friendly", img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400", category: "pet-friendly" },
+              { title: "Travel tips", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400", category: "trending" }
             ].map((item, index) => (
-              <div key={index} className="relative h-44 rounded-xl overflow-hidden group cursor-pointer">
+              <div
+                key={index}
+                className="relative h-44 rounded-xl overflow-hidden group cursor-pointer"
+                onClick={() => handleInspirationClick(item.category)}
+              >
                 <img
-                  src={item.img} 
+                  src={item.img}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />

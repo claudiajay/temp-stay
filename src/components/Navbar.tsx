@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import AuthModal from './AuthModal';
+import PropertyUploadModal from './PropertyUploadModal';
 
 const Navbar: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+   const [isPropertyModalOpen, setIsPropertyModalOpen] = useState(false);
 
   const onOpenAuth = (mode: 'login' | 'signup') => {
     setAuthMode(mode);
@@ -14,19 +16,30 @@ const Navbar: React.FC = () => {
     setIsAuthModalOpen(false);
   };
 
+   const onOpenPropertyUpload = () => {
+    setIsPropertyModalOpen(true);
+  };
+
+  const onClosePropertyUpload = () => {
+    setIsPropertyModalOpen(false);
+  };
+
   return (
     <>
       <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-8">
             <div className="text-2xl font-bold text-red-500">Nook</div>
-            <div className="hidden md:flex space-x-6">
+            {/* <div className="hidden md:flex space-x-6">
               <a href="#" className="text-gray-700 hover:text-gray-900 font-medium">Stays</a>
               <a href="#" className="text-gray-700 hover:text-gray-900 font-medium">Experiences</a>
-            </div>
+            </div> */}
           </div>
           <div className="flex items-center space-x-4">
-            <button className="text-gray-500 hover:text-gray-900 font-medium">Host on Nook</button>
+            <button 
+            className="text-gray-500 hover:text-gray-900 font-medium"
+            onClick={onOpenPropertyUpload}
+            >Host on Nook</button>
             <div className="flex items-center space-x-2 border border-gray-300 rounded-full px-4 py-2 hover:shadow-md transition">
               <button
                 onClick={() => onOpenAuth('login')}
@@ -34,6 +47,7 @@ const Navbar: React.FC = () => {
               >
                 Log in
               </button>
+              <div className="h-5 w-px bg-gray-400"></div>
               <button
                 onClick={() => onOpenAuth('signup')}
                 className="text-sm font-medium text-gray-700 hover:text-gray-900"
@@ -51,6 +65,11 @@ const Navbar: React.FC = () => {
         isOpen={isAuthModalOpen}
         onClose={onCloseAuth}
         // mode={authMode}
+      />
+
+      <PropertyUploadModal
+        isOpen={isPropertyModalOpen}
+        onClose={onClosePropertyUpload}
       />
     </>
   );
