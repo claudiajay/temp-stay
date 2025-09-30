@@ -93,9 +93,9 @@ const PropertyUploadModal: React.FC<PropertyUploadModalProps> = ({ isOpen, onClo
   const handleSubmit = () => {
     console.log('Property data:', propertyData);
     alert('Property uploaded successfully!');
-    onClose(); // ✅ works now since it's a prop
+    onClose(); 
 
-    // Reset form
+   
     setPropertyData({
       title: '',
       description: '',

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, Mail, Lock, Eye, EyeOff, Facebook, Apple, Phone, ArrowLeft, CheckCircle } from 'lucide-react';
+import { X, Mail, Lock, Eye, EyeOff, Phone, ArrowLeft, CheckCircle } from 'lucide-react';
 
 interface AuthModalProps {
   isOpen: boolean;

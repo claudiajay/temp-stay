@@ -18,7 +18,7 @@ interface PropertyDetailsPageProps {
 
 const PropertyDetailsPage: React.FC<PropertyDetailsPageProps> = ({ property, onBack }) => {
   const navigate = useNavigate();
-  // Enhanced property data based on the passed property
+
   const propertyData = {
     ...property,
     reviewCount: 127,
@@ -56,7 +56,7 @@ const PropertyDetailsPage: React.FC<PropertyDetailsPageProps> = ({ property, onB
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [showBooking, setShowBooking] = useState(false);
+  // const [showBooking, setShowBooking] = useState(false);
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(1);
@@ -128,15 +128,15 @@ const PropertyDetailsPage: React.FC<PropertyDetailsPageProps> = ({ property, onB
     setShowPayment(true);
   };
 
-  const processPayment = () => {
-    // Mock payment processing
-    setPaymentStep('confirmation');
-    setTimeout(() => {
-      alert('Booking confirmed! You will receive a confirmation email shortly.');
-      setShowPayment(false);
-      setPaymentStep('details');
-    }, 2000);
-  };
+  // const processPayment = () => {
+  //   // Mock payment processing
+  //   setPaymentStep('confirmation');
+  //   setTimeout(() => {
+  //     alert('Booking confirmed! You will receive a confirmation email shortly.');
+  //     setShowPayment(false);
+  //     setPaymentStep('details');
+  //   }, 2000);
+  // };
 
   interface BackButtonProps {
     onClick: () => void;
@@ -153,7 +153,7 @@ const PropertyDetailsPage: React.FC<PropertyDetailsPageProps> = ({ property, onB
   );
 
   const handleBack = () => {
-    navigate('/'); // Navigate to landing page
+    navigate('/'); //to landing page
   };
 
   if (showPayment) {
@@ -663,7 +663,7 @@ const PropertyDetailsPage: React.FC<PropertyDetailsPageProps> = ({ property, onB
 
 // Demo component to show the PropertyDetailsPage in action
 const PropertyDetails = () => {
-  const [showDetails, setShowDetails] = useState(true);
+  // const [showDetails, setShowDetails] = useState(true);
 
   // Sample property data for demo
   const sampleProperty = {
@@ -684,7 +684,7 @@ const PropertyDetails = () => {
   };
 
    const navigate = useNavigate();
-  const { id } = useParams();
+   useParams();
   
   const handleBack = () => {
     navigate('/'); // Navigate to landing page

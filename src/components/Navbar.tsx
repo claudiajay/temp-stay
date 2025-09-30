@@ -4,7 +4,7 @@ import PropertyUploadModal from './PropertyUploadModal';
 
 const Navbar: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const [, setAuthMode] = useState<'login' | 'signup'>('login');
    const [isPropertyModalOpen, setIsPropertyModalOpen] = useState(false);
 
   const onOpenAuth = (mode: 'login' | 'signup') => {
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
 
-      {/* Render AuthModal */}
+    
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={onCloseAuth}

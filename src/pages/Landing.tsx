@@ -9,7 +9,7 @@ import PropertyCard from "../components/PropertyCard";
 
 const Landing = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [showDetails, setShowDetails] = useState(true);
+  // const [showDetails, setShowDetails] = useState(true);
   const categoryTabsRef = useRef<HTMLDivElement>(null);
 
   const handleInspirationClick = (category: string) => {
