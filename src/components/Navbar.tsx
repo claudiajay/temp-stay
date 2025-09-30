@@ -1,7 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { GlobeAltIcon, Bars3Icon } from "@heroicons/react/24/outline";
-import DropMenu from "./DropMenu";
+
 
 const Navbar = () => {
   return (
