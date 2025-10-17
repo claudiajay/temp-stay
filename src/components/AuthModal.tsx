@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { X, Mail, Lock, Eye, EyeOff, Phone, ArrowLeft, CheckCircle } from 'lucide-react';
+import { login, register, requestPasswordReset } from "../api/auth";
+
+
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -105,15 +108,47 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
       try {
         if (mode === 'forgot-password') {
           // Simulate API call for password reset
+
           console.log('Password reset requested for:', formData.resetEmail);
-          await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
+          await new Promise(resolve => setTimeout(resolve, 1000));// Simulate API delay
+          await requestPasswordReset(formData.resetEmail);
           setMode('reset-sent');
-        } else {
-          console.log(`${mode} submitted:`, formData);
+        } else if (mode === 'login') {
+          // Call login API
+          console.log("Logging in:", formData.email);
+          const token = await login({ email: formData.email, password: formData.password });
+          console.log("Login successful, token:", token);
           onClose();
+        } 
+        
+        
+        
+        
+        else if (mode === 'signup') {
+          console.log("Registering user:", formData.email);
+
+          await register({
+            name: `${formData.firstName} ${formData.lastName}`,
+            email: formData.email,
+            password: formData.password,
+            userType: formData.userType
+          });
+           alert("Signup successful! Please log in.");
+      setMode("login");
+        
+
+          // console.log("Registration successful for:", formData.email);
+           
+          // console.log('email',formData.email)
+          // console.log('password',formData.password)
+          // onClose();
         }
-      } catch (error) {
+
+
+
+      } catch (error: any) {
         console.error('Submit error:', error);
+        alert(error.response?.data || "Something went wrong. Please try again.");
       } finally {
         setIsSubmitting(false);
       }
