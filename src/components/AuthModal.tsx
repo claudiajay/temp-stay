@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { X, Mail, Lock, Eye, EyeOff, Phone, ArrowLeft, CheckCircle } from 'lucide-react';
 import { login, register, requestPasswordReset } from "../api/auth";
 
+import { useAuth } from "../context/AuthContext";
+const auth = useAuth();
+
+
 
 
 interface AuthModalProps {
@@ -118,6 +122,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
           console.log("Logging in:", formData.email);
           const token = await login({ email: formData.email, password: formData.password });
           console.log("Login successful, token:", token);
+          auth.login(token);
+
           onClose();
         } 
         
