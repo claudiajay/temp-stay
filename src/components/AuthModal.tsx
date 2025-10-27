@@ -3,7 +3,7 @@ import { X, Mail, Lock, Eye, EyeOff, Phone, ArrowLeft, CheckCircle } from 'lucid
 import { login, register, requestPasswordReset } from "../api/auth";
 
 import { useAuth } from "../context/AuthContext";
-const auth = useAuth();
+
 
 
 
@@ -30,6 +30,7 @@ interface Errors {
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'login' }) => {
+const auth = useAuth();
   const [mode, setMode] = useState<'login' | 'signup' | 'forgot-password' | 'reset-sent'>(initialMode);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
