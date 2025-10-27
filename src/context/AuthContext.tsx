@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = (newToken: string, userData?: any) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
-    if (userData) { // 🟢 ADDED — save user details
+    if (userData) { 
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
     }
