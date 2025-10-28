@@ -1,11 +1,17 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import type { ReactNode } from "react";
 
+
+interface User {
+  username?: string; 
+  email?: string;      
+}
+
 interface AuthContextType {
   isAuthenticated: boolean;
   token: string | null;
-   user: any;
-  login: (token: string, userData?:any) => void;
+   user: User | null;
+   login: (token: string, user?: User) => void;
   logout: () => void;
 }
 
@@ -13,7 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
-  const [user, setUser] = useState<any>(null);
+   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     // Load token from localStorage on page load
@@ -27,12 +33,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
      }
   }, []);
 
-  const login = (newToken: string, userData?: any) => {
+  const login = (newToken: string, newUser?: User) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
-    if (userData) { 
-      localStorage.setItem("user", JSON.stringify(userData));
-      setUser(userData);
+    if (newUser) { 
+      localStorage.setItem("user", JSON.stringify(newUser));
+      setUser(newUser);
     }
   };
 

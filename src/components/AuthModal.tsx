@@ -123,7 +123,7 @@ const auth = useAuth();
           console.log("Logging in:", formData.email);
           const token = await login({ email: formData.email, password: formData.password });
           console.log("Login successful, token:", token);
-          auth.login(token);
+          auth.login(token, {username: formData.email.split('@')[0], email: formData.email });
 
           onClose();
         } 
