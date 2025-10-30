@@ -1,5 +1,6 @@
 import { Camera, DollarSign, Home, MapPin, Upload, X } from "lucide-react";
 import { useState } from "react";
+import axios from "axios";
 
 interface PropertyUploadModalProps {
   isOpen: boolean;
@@ -21,7 +22,7 @@ const PropertyUploadModal: React.FC<PropertyUploadModalProps> = ({ isOpen, onClo
     guests: string;
     pricePerNight: string;
     amenities: string[];
-    images: { name: string; size: number; url: string }[];
+    images: { name: string; size: number; file: File }[];
   }>({
     title: '',
     description: '',
@@ -74,10 +75,10 @@ const PropertyUploadModal: React.FC<PropertyUploadModalProps> = ({ isOpen, onClo
       ...prev,
       images: [
         ...prev.images,
-        ...files.map(file => ({
+        ...files.map((file) => ({
           name: file.name,
           size: file.size,
-          url: URL.createObjectURL(file)
+          file,
         }))
       ]
     }));
@@ -90,8 +91,46 @@ const PropertyUploadModal: React.FC<PropertyUploadModalProps> = ({ isOpen, onClo
     }));
   };
 
-  const handleSubmit = () => {
-    console.log('Property data:', propertyData);
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      // Append property data
+      formData.append(
+        "property",
+        JSON.stringify({
+          title: propertyData.title,
+          description: propertyData.description,
+          propertyType: propertyData.propertyType,
+          address: propertyData.address,
+          city: propertyData.city,
+          state: propertyData.state,
+          zipCode: propertyData.zipCode,
+          bedrooms: parseInt(propertyData.bedrooms) || 0,
+          bathrooms: parseFloat(propertyData.bathrooms) || 0,
+          maxGuests: parseInt(propertyData.guests) || 1,
+          pricePerNight: parseFloat(propertyData.pricePerNight) || 0,
+          amenities: propertyData.amenities,
+        })
+      );
+      // Append images
+      propertyData.images.forEach((image) => {
+        formData.append("images", image.file);
+      });
+
+      // Make API call (replace with your backend URL)
+      const response = await axios.post(
+        "http://localhost:8080/api/properties",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`, // Assuming JWT is stored in localStorage
+          },
+        }
+      );
+
+
+    console.log("Property created:", response.data);
     alert('Property uploaded successfully!');
     onClose(); 
 
@@ -112,6 +151,11 @@ const PropertyUploadModal: React.FC<PropertyUploadModalProps> = ({ isOpen, onClo
       images: []
     });
     setCurrentStep(1);
+    } catch (error) {
+      console.error("Error uploading property:", error);
+      alert("Failed to upload property. Please try again.");
+    }
+
   };
 
   const nextStep = () => {
@@ -393,7 +437,7 @@ const PropertyUploadModal: React.FC<PropertyUploadModalProps> = ({ isOpen, onClo
                     {propertyData.images.map((image, index) => (
                       <div key={index} className="relative">
                         <img
-                          src={image.url}
+                          src={URL.createObjectURL(image.file)}
                           alt={`Property ${index + 1}`}
                           className="w-full h-24 object-cover rounded-lg"
                         />
