@@ -99,12 +99,27 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
             <span className='font-medium'>{property.rating}</span>
           </div>
         </div>
-        <p className='text-gray-500 text-sm truncate'>{property.location}</p>
+        {/* <p className='text-gray-500 text-sm truncate'>{property.location}</p>
         <p className='text-gray-500 text-sm'>{property.distance}</p>
         <p className='text-gray-500 text-sm'>{property.dates}</p>
         <p className='text-gray-500 font-medium'>
           <span className='font-semibold'>${property.price}</span> night
-        </p>
+        </p> */}
+
+        <div className='flex justify-between items-center'>
+          <p className='text-gray-500 text-sm truncate'>{property.location}</p>
+          <div className='border border-pink-300 rounded-full px-3 py-0.4 hover:shadow-md transition'>
+            <p className='text-gray-500 font-medium'>
+              <span className='font-semibold'>${property.price}</span> night
+            </p>
+          </div>
+        </div>
+        <p className='text-gray-500 text-sm'>{property.distance}</p>
+        <p className='text-gray-500 text-sm'>{property.dates}</p>
+
+
+
+
       </div>
     </div>
   );
