@@ -4,7 +4,8 @@ import type { ReactNode } from "react";
 
 interface User {
   username?: string; 
-  email?: string;      
+  email?: string;  
+  avatar?: string;    
 }
 
 interface AuthContextType {
